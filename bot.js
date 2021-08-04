@@ -20,7 +20,7 @@ bot.start((ctx) => {
 })
 
 bot.help((ctx) => {
-  ctx.reply('this bot has the following commands\n  -/start\n - /help\n - /jokes\n - /insults\n -/superhero\n - /say ')
+  ctx.reply('this bot has the following commands\n  -/start\n - /help\n - /jokes\n - /insults\n -/superhero\n example: /superhero batman\n - /say\n example: /say hello ')
 
 })
 
@@ -90,7 +90,7 @@ bot.command('superhero', (ctx) => {
   getComics(textMsg)
 
   async function getComics() {
-    var url = "https://superheroapi.com/api/process.env.ACCESS_TOKEN/search/" + encodeURIComponent(textMsg)
+    var url = "https://superheroapi.com/api/4234311646621135/search/" + encodeURIComponent(textMsg)
     console.log("url: " + url)
     const response = await fetch(url)
     const json = await response.json()
