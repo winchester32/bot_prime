@@ -2,7 +2,7 @@ console.log('telegram bot is starting');
 const fetch = require('node-fetch');
 require('dotenv').config()
 
-
+var $ = require( "jquery" );
 
 const { Telegraf } = require('telegraf')
 
@@ -20,7 +20,7 @@ bot.start((ctx) => {
 })
 
 bot.help((ctx) => {
-  ctx.reply('this bot has the following commands\n  -/start\n - /help\n - /jokes\n - /insults\n -/superhero\n example: /superhero batman\n - /say\n example: /say hello ')
+  ctx.reply('this bot has the following commands\n  -/start\n - /help\n - /jokes\n -/dadjokes\n -/insults\n -/superhero\n example: /superhero batman\n - /say\n example: /say hello\n -/footballvideos\n for latest football highlights\n ')
 
 })
 
@@ -67,6 +67,26 @@ bot.command('jokes', (ctx) => {
 
 })
 
+bot.command('dadjokes', (ctx)=>{
+  getDadJoke()
+
+  async function getDadJoke (){
+  const response = await fetch('https://icanhazdadjoke.com', { 
+    method: 'GET',
+    headers: {
+      //'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    }
+
+  })
+  const json = await response.json()
+  //console.log(json.joke);
+  
+  ctx.reply(json.joke)
+  }
+})
+
+
 bot.command('insults', (ctx) => {
   getInsult()
   async function getInsult() {
@@ -91,11 +111,11 @@ bot.command('superhero', (ctx) => {
 
   async function getComics() {
     var url = "https://superheroapi.com/api/4234311646621135/search/" + encodeURIComponent(textMsg)
-    console.log("url: " + url)
+    //console.log("url: " + url)
     const response = await fetch(url)
     const json = await response.json()
 
-    console.log(JSON.stringify(json))
+    //console.log(JSON.stringify(json))
 
 
 
@@ -119,7 +139,8 @@ bot.command('superhero', (ctx) => {
         "\nHair Colour : " + superhero.appearance["hair-color"] +
         "\n\n*Connections*" +
         "\nGroup Affiliations : " + superhero.connections["group-affiliation"] +
-        "\nRelatives : " + superhero.connections.relatives
+        "\nRelatives : " + superhero.connections.relatives +
+        "\nImage :" + superhero.image.url
 
       ctx.replyWithMarkdown(reply)
     }
@@ -129,6 +150,41 @@ bot.command('superhero', (ctx) => {
 
 })
 
+
+
+bot.command('footballvideos', (ctx) => {
+getVideo()
+  async function getVideo(){
+ const response = await fetch ('https://www.scorebat.com/video-api/v3/')
+ const json = await response.json()
+ //console.log(json)
+ //console.log(JSON.stringify(json))
+
+ for (i in json.response){
+   var score = json.response[i]
+   //console.log(score)
+
+  
+   var scores =  "\ntitle : " + score.title +  "\ncompetition : " + score.competition +
+    "\ndate : " + score.date + 
+    "\nvideos : " + JSON.stringify(score.videos)  
+   
+//console.log(scores)
+/*
+var htmlString = json.embed
+var $test = $(htmlString) 
+
+var src = $test.filter(':first').prop('src');
+
+console.log(src);
+*/
+
+   ctx.reply(scores)
+ }
+
+  }
+  //ctx.reply(json.title)
+})
 
 
 

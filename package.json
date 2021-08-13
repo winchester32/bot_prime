@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^10.0.0",
+    "jquery": "^3.6.0",
     "node-telegram-bot-api": "^0.53.0",
     "telegraf": "^3.38.0"
   }
