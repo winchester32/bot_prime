@@ -20,7 +20,7 @@ bot.start((ctx) => {
 })
 
 bot.help((ctx) => {
-  ctx.reply('this bot has the following commands\n  -/start\n - /help\n - /jokes\n -/dadjokes\n -/insults\n -/superhero\n example: /superhero batman\n - /say\n example: /say hello\n -/footballvideos\n for latest football highlights\n ')
+  ctx.reply('this bot has the following commands\n  -/start\n - /help\n -/dadjokes\n -/insults\n -/superhero\n example: /superhero batman\n - /say\n example: /say hello\n -/footballvideos\n for latest football highlights\n ')
 
 })
 
@@ -46,7 +46,7 @@ bot.command('say', (ctx) => {
   ctx.reply(newmsg)
 })
 
-
+/*
 bot.command('jokes', (ctx) => {
   getJoke()
   async function getJoke() {
@@ -66,7 +66,7 @@ bot.command('jokes', (ctx) => {
 
 
 })
-
+*/
 bot.command('dadjokes', (ctx)=>{
   getDadJoke()
 
